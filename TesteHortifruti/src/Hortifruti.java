@@ -1,6 +1,8 @@
  import javax.swing.*;
+ import java.text.SimpleDateFormat;
+ import java.util.Date;
 
-    public class Hortifruti {
+ public class Hortifruti {
 
         private String nomeProduto;
 
@@ -16,9 +18,15 @@
 
         private Integer validadeDoProduto;
 
-        private Integer mesAtual;
+        private Integer dataAtual;
 
-        public String getNomeProduto() {
+        private Integer dataValidade;
+
+        private Integer valorDesconto;
+
+        public Integer a;
+
+     public String getNomeProduto() {
             return nomeProduto;
         }
 
@@ -74,13 +82,10 @@
             this.validadeDoProduto = validadeDoProduto;
         }
 
-        public Integer getMesAtual() {
-            return mesAtual;
-        }
+        /*
+        Função para cadastrar o produto
+        */
 
-        public void setMesAtual(Integer mesAtual) {
-            this.mesAtual = mesAtual;
-        }
 
         public void cadastrarProduto(){
 
@@ -92,12 +97,24 @@
                     "do momento em que ele será registrado: "));
         }
 
+
+        /*
+        Função para mostrar o produto na tela
+        */
+
+
         public void mostrarProduto(){
 
             JOptionPane.showMessageDialog(null,"Nome do produto: " +this.nomeProduto+ "\nTipo do produto: " +this.tipoProduto+
                     "\nValor do produto (Unitário): R$" +this.valorProduto+ "\nQuantidade disponivel: " +this.quantidadeDisponivel+
                     "\nValidade do produto (EM DIAS): " +this.validadeDoProduto);
         }
+
+
+        /*
+        Função para verificação de estoque
+        * */
+     
 
         public Boolean verificaEstoque(Integer quantidadeDisponivel, Integer quantidadeAPegar){
             if(quantidadeAPegar <= quantidadeDisponivel){
@@ -106,7 +123,14 @@
             return false;
         }
 
-        public boolean vendaProduto(){
+
+        /*
+        Função de venda do produto
+        juntamente com o lucro após a venda
+        */
+
+
+        public Boolean vendaProduto(){
             quantidadeAPegar = Integer.parseInt(JOptionPane.showInputDialog("Informe a quantidade que deseja comprar: "));
             if(verificaEstoque(this.quantidadeDisponivel, quantidadeAPegar)){
                 lucro = this.valorProduto *= quantidadeAPegar;
@@ -116,12 +140,32 @@
             return false;
         }
 
-        public boolean estoqueZerado(){
+
+        /*
+        Função para verificar se o estoque está zerado ou não
+         caso esteja
+          ele passará a ser true
+          */
+
+
+        public Boolean estoqueZerado(){
             if(this.quantidadeDisponivel == 0){
                 return true;
             }
             return false;
         }
-    }
+
+        /*public void verificaValidade(){
+         dataAtual = Integer.parseInt(JOptionPane.showInputDialog("Informe quantos dias se passaram desde que o produto foi cadastrado: "));
+            if(this.dataAtual >= this.validadeDoProduto){
+                a=1;
+            } else if (this.dataAtual < this.validadeDoProduto - 1) {
+                a=2;
+                this.lucro = ((this.valorProduto*this.quantidadeAPegar) / (100/10));
+            }else{
+                this.lucro = this.valorProduto * this.quantidadeAPegar;
+            }
+        }*/
+ }
 
 
